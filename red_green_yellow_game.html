@@ -1,0 +1,77 @@
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <title> red green yellow</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <button class="colorSquare" id="red" style="height: 100px;width: 100px; background-color: red;"
+                value="red"></button>
+            <button class="colorSquare" id="yellow" style="height: 100px; width: 100px; background-color:yellow;"
+                value="yellow"></button>
+            <button class="colorSquare" id="green" style="height: 100px; width:100px; background-color:green;"
+                value="green"></button>
+        </div>
+        <br><br>
+        <div>
+            <button id="total_click"><b>Total click</b></button>
+            <button id="clear-game"><b>Clear Game</b></button>
+            <p id="total-score">Total Score: 0</p>
+        </div>
+    </div>
+    <script>
+        let redDiv = document.getElementById("red")
+        let yellowDiv = document.getElementById("yellow")
+        let greenDiv = document.getElementById("green")
+
+        const squares = document.querySelectorAll(".colorSquare")
+
+        const timesClicked = { "red": 0, "yellow": 0, "green": 0 }
+        squares.forEach(square => {
+            square.onclick = () => {
+                timesClicked[square.value] += 1
+                square.innerText = timesClicked[square.value]
+            }
+        })
+        function clearScores() {
+            timesClicked.red = 0
+            timesClicked.yellow = 0
+            timesClicked.green = 0
+                squares.forEach(square => {
+                square.innerText = ""
+            })
+
+            document.getElementById("total-score").innerText = "Total Score: 0";
+        }
+        const clearGameBtn = document.getElementById("clear-game")
+        clearGameBtn.onclick = () => clearScores()
+
+        function totalSCore() {
+            let total = 0;
+            squares.forEach(square => {
+                total += timesClicked[square.value]
+            });
+            const totalScoreElement = document.getElementById("total-score");
+            totalScoreElement.innerText = "Total Score: " + total;
+    }
+
+        const totalclickBtn = document.getElementById("total_click")
+        totalclickBtn.onclick = () => totalSCore()
+    </script>
+</body>
+
+</html>
